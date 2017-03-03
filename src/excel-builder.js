@@ -34,29 +34,29 @@ var Factory = {
      * @param {Function} options.error The callback function to run if there is an error creating the workbook.
      * @param {String} options.requireJsPath (Optional) The path to requirejs. Will use the id 'requirejs' to look up the script if not specified.
      */
-    createFileAsync: function (workbook, options) {
-
-
-        workbook.generateFilesAsync({
-            success: function (files) {
-
-                var worker = new Worker(require.toUrl('./Excel/ZipWorker.js'));
-                worker.addEventListener('message', function(event) {
-                    if(event.data.status === 'done') {
-                        options.success(event.data.data);
-                    }
-                });
-                worker.postMessage({
-                    files: files,
-                    ziplib: require.toUrl('JSZip'),
-                    base64: (!options || options.base64 !== false)
-                });
-            },
-            error: function () {
-                options.error();
-            }
-        });
-    },
+//    createFileAsync: function (workbook, options) {
+//
+//
+//        workbook.generateFilesAsync({
+//            success: function (files) {
+//
+//                var worker = new Worker(require.toUrl('./Excel/ZipWorker.js'));
+//                worker.addEventListener('message', function(event) {
+//                    if(event.data.status === 'done') {
+//                        options.success(event.data.data);
+//                    }
+//                });
+//                worker.postMessage({
+//                    files: files,
+//                    ziplib: require.toUrl('JSZip'),
+//                    base64: (!options || options.base64 !== false)
+//                });
+//            },
+//            error: function () {
+//                options.error();
+//            }
+//        });
+//    },
 
     /**
      * Turns a workbook into a downloadable file.
